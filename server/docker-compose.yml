@@ -1,26 +1,28 @@
 version: '3.8'
-
 services:
+  todolist:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
   mongo:
-    image: mongo:latest
-    container_name: mongo
+    image: mongo:6.0
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-  to-do_list:
-    build:
-      context: .
-    container_name: to-do_list
-    ports:
-      - "3000:3000"
-    depends_on:
-      - mongo
-    environment:
-      MONGO_URL: mongodb://mongo:27017/to-do_list
-    volumes:
-      - .:/usr/src/app
-    command: npm run dev
+    networks:
+      - app-network
 
 volumes:
   mongo-data:
+
+networks:
+  app-network:
+    driver: bridge

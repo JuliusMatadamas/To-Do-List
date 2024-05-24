@@ -1,7 +1,7 @@
 import "dotenv/config";
 import UserModel from "../models/user.model";
 import { User } from "../interfaces/user.interface";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 const privateKey = process.env.PRIVATE_KEY;
 

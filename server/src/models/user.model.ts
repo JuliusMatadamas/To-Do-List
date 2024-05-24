@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import { User } from "../interfaces/user.interface";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs"
 
 const emailValidator = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
