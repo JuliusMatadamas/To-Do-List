@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+    <ion-toolbar  color="light">
+        <ion-title>ToDo List</ion-title>
+    </ion-toolbar>
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-button routerLink="/pendings"> Pendientes </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button routerLink="/completes"> Completadas </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-list>
+        <ion-list-header>
+            <ion-label>Agregar Tarea</ion-label>
+            <ion-button routerLink="/home">Lista general</ion-button>
+        </ion-list-header>
+
+        <form class="ion-padding" [formGroup]="addForm" (ngSubmit)="validateForm()">
+            <ion-item>
+                <ion-textarea formControlName="title" label="Título" labelPlacement="stacked" placeholder="Nombre de la tarea (al menos 2 caracteres)"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-textarea formControlName="description" label="Descripción" labelPlacement="stacked" placeholder="Describe la tarea a realizar (al menos 5 caracteres)"></ion-textarea>
+            </ion-item>
+
+            <div class="add-button ion-padding">
+                <ion-button size="large" type="submit">Guardar</ion-button>
+            </div>
+
+            <ion-modal [keepContentsMounted]="true">
+                <ng-template>
+                    <ion-datetime #datetime id="datetime" locale="es-ES" [value]="dateTime" [(ngModel)]="date"></ion-datetime>
+                </ng-template>
+            </ion-modal>
+        </form>
+    </ion-list>
+</ion-content>

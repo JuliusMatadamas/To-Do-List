@@ -1,0 +1,29 @@
+ion-content {
+    --background: #fff;
+    --color: #333;
+}
+ion-list {
+    --background: #fff;
+    --color: #333;
+}
+ion-item {
+    --background: #fff;
+    --color: #333;
+}
+ion-list-header {
+    --background: #fff;
+    --color: #333;
+    text-align: center;
+}
+.list-ios {
+    background: #fff !important;
+}
+.add-button{
+    text-align: center;
+    ion-button {
+        --background: #ff9d28;
+        font-size: 1rem;
+        font-weight: bold;
+        width: 100%;
+    }
+}

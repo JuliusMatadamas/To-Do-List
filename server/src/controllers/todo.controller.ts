@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAll, getById, registerTodo, modifyTodo, eraseTodo } from "../services/todo.service";
+import { getAll, getAllPendings, getAllCompletes, getById, registerTodo, modifyTodo, eraseTodo, eraseTodoCompletes } from "../services/todo.service";
 
 const findAll = async (req:Request, res:Response) => {
     try {
@@ -15,6 +15,37 @@ const findAll = async (req:Request, res:Response) => {
         });
     }
 }
+
+const findAllPendings = async (req:Request, res:Response) => {
+    try {
+        const resTodo = await getAllPendings(req.body.userId);
+        res.status(200).json({
+            "message":"Tareas pendientes recuperadas.",
+            "data":resTodo
+        })
+    } catch (e:any) {
+        res.status(500).json({
+            "message":e.message,
+            "data":null
+        });
+    }
+}
+
+const findAllCompletes = async (req:Request, res:Response) => {
+    try {
+        const resTodo = await getAllCompletes(req.body.userId);
+        res.status(200).json({
+            "message":"Tareas completadas recuperadas.",
+            "data":resTodo
+        })
+    } catch (e:any) {
+        res.status(500).json({
+            "message":e.message,
+            "data":null
+        });
+    }
+}
+
 
 const findById = async (req:Request, res:Response) => {
     const { _id, userId } = req.body;
@@ -79,5 +110,21 @@ const deleteTodo = async (req:Request, res:Response) => {
     }
 }
 
+const deleteTodoCompletes = async (req:Request, res:Response) => {
+    const { _id, userId } = req.body;
+    try {
+        const resTodo = await eraseTodoCompletes(userId)
+        res.status(200).json({
+            "message":"Tareas completadas eliminadas correctamente.",
+            "data":resTodo
+        })
+    } catch (e:any) {
+        res.status(500).json({
+            "message":e.message,
+            "data":null
+        });
+    }
+}
 
-export { findAll, findById, createTodo, updateTodo, deleteTodo };
+
+export { findAll, findAllPendings, findAllCompletes, findById, createTodo, updateTodo, deleteTodo, deleteTodoCompletes };

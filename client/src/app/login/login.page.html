@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+    <div class="login-section ion-padding">
+        <div class="heading ion-padding">
+            <h1>ToDo List</h1>
+            <p>Ingresa tus datos para continuar</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="validateForm()">
+            <div class="login-form ion-padding">
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">EMAIL</ion-label>
+                        <ion-input type="email" formControlName="email"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">PASSWORD</ion-label>
+                        <ion-input type="password" formControlName="password"></ion-input>
+                    </ion-item>
+                </div>
+
+                <div class="action-buttons ion-padding">
+                    <ion-button size="large" class="login-button" type="submit">Ingresar</ion-button>
+                    <p>¿No estás registrado?</p>
+                    <ion-button class="signup-button" size="large" fill="outline" routerLink="/signup">Registrarse</ion-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</ion-content>

@@ -1,10 +1,6 @@
 import { model, Schema } from "mongoose";
 import { Todo } from "../interfaces/todo.interface";
 
-const isValidDate = (date: string) => {
-    return !isNaN(Date.parse(date));
-};
-
 const TodoSchema = new Schema<Todo>({
     userId: {
         type: Schema.Types.ObjectId,
@@ -23,15 +19,6 @@ const TodoSchema = new Schema<Todo>({
         required: true,
         trim: true,
         minlength: [2, 'La descripción debe tener al menos 2 caracteres']
-    },
-    date: {
-        type: String,
-        required: true,
-        trim: true,
-        validate: {
-            validator: isValidDate,
-            message: 'La fecha debe ser válida'
-        }
     },
     status: {
         type: String,
