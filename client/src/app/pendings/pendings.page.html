@@ -1,13 +1,45 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>pendings</ion-title>
-  </ion-toolbar>
+    <ion-toolbar  color="light">
+        <ion-title>ToDo List</ion-title>
+    </ion-toolbar>
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-button routerLink="/home"> Lista general </ion-button>
+        </ion-buttons>
+
+        <ion-buttons slot="end">
+            <ion-button routerLink="/completes"> Completadas </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">pendings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>Tareas pendientes</ion-label>
+            <ion-button routerLink="/add">Crear</ion-button>
+        </ion-list-header>
+        <ion-item *ngFor="let item of data">
+            <ion-card [ngClass]="{'card-incompleta': item.status === 'Incompleta', 'card-completada': item.status === 'Completada'}">
+                <ion-card-header>
+                    <ion-card-title>{{ item.title }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                    {{ item.description }}
+                </ion-card-content>
+
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-button fill="clear" [routerLink]="['/edit', item._id]">Ver / Editar</ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button fill="clear">{{ item.status }}</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card>
+        </ion-item>
+    </ion-list>
+    <ion-loading trigger="open-loading" message="Obteniendo datos..." spinner="circles"></ion-loading>
 </ion-content>

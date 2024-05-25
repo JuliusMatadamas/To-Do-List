@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'completes',
     loadChildren: () => import('./completes/completes.module').then( m => m.CompletesPageModule)
   },
+  {
+    path: 'edit/:_id',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
+  },
 ];
 
 @NgModule({

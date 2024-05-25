@@ -18,3 +18,43 @@ ion-list-header {
     --color: #333;
     text-align: center;
 }
+.card-incompleta {
+    --background: #ffe559;
+    --color: #333;
+    ion-card-header .ion-inherit-color {
+        --color: #333;
+        font-weight: bold;
+    }
+    ion-grid {
+        ion-row {
+            ion-col {
+                ion-button {
+                    --color: #333;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.card-completada {
+    --background: #8ce580;
+    --color: #333;
+    ion-card-header .ion-inherit-color {
+        --color: #333;
+        font-weight: bold;
+    }
+    ion-grid {
+        ion-row {
+            ion-col {
+                ion-button {
+                    --color: #333;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+

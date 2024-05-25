@@ -19,122 +19,27 @@
             <ion-label>Lista general</ion-label>
             <ion-button routerLink="/add">+ Agregar</ion-button>
         </ion-list-header>
-
-        <ion-item>
-            <ion-card>
+        <ion-item *ngFor="let item of data">
+            <ion-card [ngClass]="{'card-incompleta': item.status === 'Incompleta', 'card-completada': item.status === 'Completada'}">
                 <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+                    <ion-card-title>{{ item.title }}</ion-card-title>
                 </ion-card-header>
-
                 <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
+                    {{ item.description }}
                 </ion-card-content>
-            </ion-card>
-        </ion-item>
 
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
-            </ion-card>
-        </ion-item>
-
-        <ion-item>
-            <ion-card>
-                <ion-card-header>
-                    <ion-card-title>Card Title</ion-card-title>
-                    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                </ion-card-header>
-
-                <ion-card-content>
-                    Here's a small text description for the card content. Nothing more, nothing less.
-                </ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-button fill="clear" [routerLink]="['/edit', item._id]">Ver / Editar</ion-button>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button fill="clear">{{ item.status }}</ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-card>
         </ion-item>
     </ion-list>
+    <ion-loading trigger="open-loading" message="Obteniendo datos..." spinner="circles"></ion-loading>
 </ion-content>

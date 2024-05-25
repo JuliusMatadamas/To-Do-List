@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController } from "@ionic/angular";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ResponseAuth } from "../interfaces/response.interface";
+import { ResponseInterface } from "../interfaces/response.interface";
 import { Router } from "@angular/router";
 
 @Component({
@@ -87,7 +87,7 @@ export class LoginPage implements OnInit {
     }
 
     private sendFormData(data: { email: string, password: string }) {
-        this.http.post<ResponseAuth>('http://localhost:3000/auth/signin', data).subscribe((response: ResponseAuth) => {
+        this.http.post<ResponseInterface>('http://localhost:3000/auth/signin', data).subscribe((response: ResponseInterface) => {
                 const message = response.message;
                 const data = JSON.parse(JSON.stringify(response.data));
                 localStorage.setItem('_id', data._id);

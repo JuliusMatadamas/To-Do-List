@@ -1,4 +1,4 @@
-export interface ResponseAuth {
+export interface ResponseInterface {
     message: string;
     data: object | null;
 }

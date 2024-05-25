@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from "@ionic/angular";
+import { ToastController, LoadingController  } from "@ionic/angular";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from "@angular/router";
+import { ResponseInterface } from "../interfaces/response.interface";
 
 
 @Component({
@@ -13,11 +14,10 @@ import { Router } from "@angular/router";
 export class AddPage implements OnInit {
     // @ts-ignore
     addForm: FormGroup;
-    // @ts-ignore
-    dateTime: string;
 
     constructor(
         private toastController: ToastController,
+        private loadingController: LoadingController,
         private formBuilder: FormBuilder,
         private router: Router,
         private http: HttpClient
@@ -47,6 +47,14 @@ export class AddPage implements OnInit {
 
     validateForm() {
         if (this.addForm.valid) {
+            const userId = localStorage.getItem('userId');
+            // @ts-ignore
+            const title: string = this.addForm.get('title').value;
+            // @ts-ignore
+            const description: string = this.addForm.get('description').value;
+            const status: string = "Incompleta";
+            // @ts-ignore
+            this.sendFormData({ userId, title, description, status });
         } else {
             const { title, description } = this.addForm.controls;
             if (title.status === "INVALID") {
@@ -55,9 +63,31 @@ export class AddPage implements OnInit {
             }
 
             if (description.status === "INVALID") {
-                this.showToast('top', '¡La descripción de la tarea debe tener al menos5 caracteres!', 'danger');
+                this.showToast('top', '¡La descripción de la tarea debe tener al menos 5 caracteres!', 'danger');
                 return;
             }
         }
+    }
+
+    private async sendFormData(data: { userId: string, title: string, description: string, status: string }) {
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        const loading = await this.loadingController.create({
+            message: 'Guardando...',
+            spinner: 'circles'
+        });
+        await loading.present();
+        this.http.post<ResponseInterface>('http://localhost:3000/todo/create', data, { headers }).subscribe(async (response: ResponseInterface) => {
+                const message = response.message;
+                await loading.dismiss();
+                this.showToast('top', message, 'success', () => {
+                    this.router.navigate(['/home']);
+                });
+            },
+            async error => {
+                let message = error.error.message;
+                await loading.dismiss();
+                this.showToast('top', message, 'danger');
+            });
     }
 }

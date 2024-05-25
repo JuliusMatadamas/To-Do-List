@@ -16,11 +16,21 @@
 <ion-content [fullscreen]="true">
     <ion-list>
         <ion-list-header>
-            <ion-label>Agregar Tarea</ion-label>
+            <ion-label>Ver-Editar  Tarea</ion-label>
             <ion-button routerLink="/home">Lista general</ion-button>
         </ion-list-header>
 
-        <form class="ion-padding" [formGroup]="addForm" (ngSubmit)="validateForm()">
+        <ion-toolbar color="light" class="edit-toolbar ion-padding">
+            <ion-buttons slot="start">
+                <ion-button (click)="completeTodo()">Completada</ion-button>
+            </ion-buttons>
+
+            <ion-buttons slot="end">
+                <ion-button (click)="deleteTodo()">Eliminar</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+
+        <form class="ion-padding" [formGroup]="editForm" (ngSubmit)="validateForm()">
             <ion-item>
                 <ion-textarea formControlName="title" label="Título" labelPlacement="stacked" placeholder="Nombre de la tarea (al menos 2 caracteres)"></ion-textarea>
             </ion-item>
@@ -30,7 +40,7 @@
             </ion-item>
 
             <div class="add-button ion-padding">
-                <ion-button id="open-loading" size="large" type="submit">Guardar</ion-button>
+                <ion-button id="open-loading" size="large" type="submit">Actualizar</ion-button>
             </div>
         </form>
         <ion-loading trigger="open-loading" message="Guardando..." [duration]="3000" spinner="circles"></ion-loading>
